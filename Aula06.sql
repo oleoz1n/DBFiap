@@ -30,11 +30,11 @@ END;
 
 DECLARE
     CURSOR prod_cursor(id_prod integer) is
-        select desc_produto, valor_produto from produto where id_produto = is_prod;
+        select desc_produto, valor_produto from produto where id_produto = id_prod;
         
     rowp prod_cursor%rowtype;
 BEGIN
-    OPEN prod_cursor(10);
+    OPEN prod_cursor(8);
     LOOP
         FETCH prod_cursor into rowp;
         exit when prod_cursor%notfound;
