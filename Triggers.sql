@@ -56,7 +56,7 @@ drop table auditoria_senha ;
 create table auditoria_senha (
                         senha_antiga varchar2(20),
                         senha_atual varchar2(20),
-                        dt_alterada date
+                        dt_alterada date default sysdate
                         );
 
 create or replace trigger valida_senha
@@ -66,13 +66,13 @@ on funcFiap
 for each row
 begin
     if :new.senha != :old.senha then
-        insert into auditoria_senha values (:old.senha, :new.senha, sysdate);
+        insert into auditoria_senha (senha_antiga, senha_atual) values (:old.senha, :new.senha);
     end if;
 end;
 
 insert into funcFiap values (311, 'Leonardo', 20000, 'SalveLeo');
 
-update funcFiap set senha = 'SalveLeo' where mat_fun = 321;
+update funcFiap set senha = 'SalveLeo3' where mat_fun = 321;
 
 select * from funcFiap;
 select * from auditoria_senha;
